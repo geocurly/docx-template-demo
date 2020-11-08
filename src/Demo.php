@@ -63,13 +63,7 @@ class Demo
         $nodes = [];
         /** @var AstNode $block */
         foreach ($lexer->parse() as $block) {
-            $nodes[] = [
-                'type' => get_class($block),
-                'position' => [
-                    'start' => $block->getPosition()->getStart(),
-                    'end' => $block->getPosition()->getEnd(),
-                ]
-            ];
+            $nodes[] = $block->toArray();
         }
 
         return $nodes;
