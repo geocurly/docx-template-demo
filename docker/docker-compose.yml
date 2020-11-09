@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: demo-nginx
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - "${LOCAL_DEMO_PATH}:${INNER_DEMO_PATH}"
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx/
+    links:
+      - php-fpm
+    networks:
+      - demo-network
+  php-fpm:
+    container_name: demo-php-fpm
+    image: php:7.4-fpm
+    volumes:
+      - "${LOCAL_DEMO_PATH}:${INNER_DEMO_PATH}"
+    networks:
+      - demo-network
+networks:
+  demo-network:
+    driver: bridge

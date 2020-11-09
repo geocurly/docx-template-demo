@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocurly/docx-template.git",
-                "reference": "427b3b8d130080d37f07dec07206f9089c62d386"
+                "reference": "ed8a472cc2719af74dcf8418a7a9cd8d24f7082a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocurly/docx-template/zipball/427b3b8d130080d37f07dec07206f9089c62d386",
-                "reference": "427b3b8d130080d37f07dec07206f9089c62d386",
+                "url": "https://api.github.com/repos/geocurly/docx-template/zipball/ed8a472cc2719af74dcf8418a7a9cd8d24f7082a",
+                "reference": "ed8a472cc2719af74dcf8418a7a9cd8d24f7082a",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
                 "source": "https://github.com/geocurly/docx-template/tree/main",
                 "issues": "https://github.com/geocurly/docx-template/issues"
             },
-            "time": "2020-11-08T16:51:47+00:00"
+            "time": "2020-11-08T16:57:57+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
