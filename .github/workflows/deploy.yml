@@ -1,0 +1,54 @@
+name: deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: yarn build
+        run: |
+          yarn install
+          yarn build
+
+      - name: upload build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: download build assets
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extension-csv: mbstring, bcmath
+
+      - name: composer install
+        run: composer install --no-dev
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
