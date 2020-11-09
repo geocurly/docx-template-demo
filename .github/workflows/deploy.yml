@@ -39,10 +39,10 @@ jobs:
         uses: shivammathur/setup-php@master
         with:
           php-version: 7.4
-          extension-csv: mbstring, bcmath
+          extensions: mbstring
 
       - name: composer install
-        run: composer install --no-dev
+        run: composer install --no-dev --ignore-platform-reqs
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
