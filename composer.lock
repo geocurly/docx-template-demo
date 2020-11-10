@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocurly/docx-template.git",
-                "reference": "ed8a472cc2719af74dcf8418a7a9cd8d24f7082a"
+                "reference": "b3081cb499b3d86a7f555f5ed9e22d23ed8d69d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocurly/docx-template/zipball/ed8a472cc2719af74dcf8418a7a9cd8d24f7082a",
-                "reference": "ed8a472cc2719af74dcf8418a7a9cd8d24f7082a",
+                "url": "https://api.github.com/repos/geocurly/docx-template/zipball/b3081cb499b3d86a7f555f5ed9e22d23ed8d69d9",
+                "reference": "b3081cb499b3d86a7f555f5ed9e22d23ed8d69d9",
                 "shasum": ""
             },
             "require": {
@@ -94,6 +94,11 @@
                     "DocxTemplate\\Tests\\": "tests/"
                 }
             },
+            "scripts": {
+                "test": [
+                    "./vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -107,7 +112,7 @@
                 "source": "https://github.com/geocurly/docx-template/tree/main",
                 "issues": "https://github.com/geocurly/docx-template/issues"
             },
-            "time": "2020-11-08T16:57:57+00:00"
+            "time": "2020-11-10T20:11:55+00:00"
         },
         {
             "name": "guzzlehttp/psr7",

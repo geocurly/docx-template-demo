@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Src;
 
 use DocxTemplate\Lexer\Contract\Ast\AstNode;
+use DocxTemplate\Lexer\Exception\SyntaxError;
 use DocxTemplate\Lexer\Lexer;
 use Slim\App;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -43,8 +44,10 @@ class Demo
                             'error' => 'Unknown parse content'
                         ];
                     } else {
-                        $data = static::buildAst((string) $params->content);
+                        $data = static::buildAst((string)$params->content);
                     }
+                } catch (SyntaxError $error) {
+                    $data['error'] = $error->getMessage();
                 } catch (\Throwable $throwable) {
                     $data['error'] = 'Something wrong';
                 }
