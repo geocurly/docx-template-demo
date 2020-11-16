@@ -23,22 +23,22 @@
         </v-main>
 
         <v-footer app>
+            <div class="email">geocurly@gmail.com</div>
         </v-footer>
     </v-app>
 </template>
 
 <script>
-import TemplateCard from "../components/TemplateCard";
 import CodeCard from "../components/CodeCard";
 import InfoCard from "../components/InfoCard";
 export default {
     name: "App",
-    components: {InfoCard, CodeCard, TemplateCard},
-    data: () => ({
-    })
+    components: {InfoCard, CodeCard},
 }
 </script>
 
 <style scoped>
-
+    .email {
+        color: #777777;
+    }
 </style>
