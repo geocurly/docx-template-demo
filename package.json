@@ -10,19 +10,22 @@
   "devDependencies": {
     "copy-webpack-plugin": "^6.3.0",
     "css-loader": "^5.0.1",
+    "deepmerge": "^4.2.2",
+    "node-sass": "^5.0.0",
     "sass": "^1.29.0",
-    "sass-loader": "^10.0.5",
+    "sass-loader": "^10.1.0",
     "vue-loader": "^15.9.5",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
-    "webpack": "^5.4.0",
+    "webpack": "^4.44.2",
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "vue": "^2.6.12",
-    "vue-codemirror": "^4.0.6",
-    "vue-material": "^1.0.0-beta-15",
+    "vue-router": "^3.4.9",
+    "vuetify": "^2.3.17",
+    "vuetify-loader": "^1.6.0",
     "vuex": "^3.5.1"
   }
 }
