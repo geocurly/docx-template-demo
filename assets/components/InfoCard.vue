@@ -20,7 +20,8 @@
             }
         },
         data: () => ({
-           title: "Abstract Syntax Tree"
+            title: "Abstract Syntax Tree",
+            contentEditable: '',
         }),
     }
 </script>
