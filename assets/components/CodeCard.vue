@@ -1,40 +1,37 @@
+<template>
+    <card title="Template" min-height="400px">
+        <template v-slot:code-content>
+            <code-content :editable="true" min-height="400px" :code="content" :view="view" @change="build"/>
+        </template>
+    </card>
+</template>
+
 <script>
-    import TemplateCard from "./TemplateCard";
-    import docxHighlight from "../plugins/highlight";
+    import Card from "./Card";
+    import CodeContent from "./CodeContent";
     export default {
         name: "CodeCard",
-        extends: TemplateCard,
-        components: {TemplateCard},
-        mounted() {
-            this.content = this.getDefault();
-            this.contentEditable = this.getDefault();
-
-            const self = this;
-            this.$refs.edit.addEventListener('input', function () {
-                self.build(this.value);
-            });
-
-            self.build(this.content);
-        },
-        data: () => ({
-            content: '',
-            contentEditable: '',
-            title: "Template",
-            editable: true,
-        }),
-        methods: {
-            getDefault() {
-                return '${ \n' +
-                    '\tdocx-template ? \n' +
-                    '\tdocx-template | parse(`OpenXMLDocument`) : \n' +
-                    '\tsaySorry( `:(` )' +
-                    '\n}' +
-                    '\n'
+        components: {CodeContent, Card},
+        computed: {
+            content: {
+                get() {
+                    return this.$store.getters.content;
+                },
+                set(value) {
+                    this.$store.dispatch('setContent', value);
+                }
             },
+            view() {
+                return this.$store.getters.default;
+            },
+            ast() {
+                return this.$store.getters.ast;
+            }
+        },
+        methods: {
             highlight(content) {
-                const ast = this.$store.getters.ast;
-                if (Array.isArray(ast)) {
-                    this.content = docxHighlight(content, ast);
+                if (Array.isArray(this.ast)) {
+                    this.content = content;//docxHighlight(content, this.ast);
                 } else {
                     this.content = content;
                 }
@@ -44,11 +41,7 @@
                 this.$store.dispatch('buildAst', content).then(() => {
                     self.highlight(content);
                 });
-            }
+            },
         }
     }
 </script>
-
-<style scoped>
-
-</style>

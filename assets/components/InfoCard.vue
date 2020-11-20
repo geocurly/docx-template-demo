@@ -1,9 +1,18 @@
+<template>
+    <card title="Abstract Syntax Tree" min-height="400px">
+        <template v-slot:code-content>
+            <code-content :editable="false" min-height="400px" :code="content"/>
+        </template>
+    </card>
+</template>
+
 <script>
     import formatHighlight from 'json-format-highlight';
-    import TemplateCard from "./TemplateCard";
+    import CodeContent from "./CodeContent";
+    import Card from "./Card";
     export default {
         name: "InfoCard",
-        extends: TemplateCard,
+        components: {Card, CodeContent},
         computed: {
             content: function() {
                 return formatHighlight(
@@ -18,14 +27,6 @@
                     }
                 );
             }
-        },
-        data: () => ({
-            title: "Abstract Syntax Tree",
-            contentEditable: '',
-        }),
+        }
     }
 </script>
-
-<style scoped>
-
-</style>
