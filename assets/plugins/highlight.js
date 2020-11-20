@@ -10,50 +10,72 @@ const ESCAPED_CHAR = 'EscapedChar';
 const EXPRESSION = 'Expression';
 const FILTER_EXPRESSION = 'FilterExpression';
 
-const COLORS = {
-    Str: "#8BC34A",
-    Block: "#80D8FF",
-    Identity: "#B39DDB",
-    Image: "#80D8FF",
-    ImageSize: "#F44336",
-    Call: "#80D8FF",
-    Condition: "#FFEB3B",
-    EscapedBlock: "#EF6C00",
-    EscapedChar: "#EF6C00",
-    Expression: "#80D8FF",
-    FilterExpression: "#80D8FF",
-    Default: "#B39DDB",
+const CLASSES = {
+    Str: "highlight--str",
+    Block: "highlight--block",
+    Identity: "highlight--identity",
+    Image: "highlight--image",
+    ImageSize: "highlight--image-size",
+    Call: "highlight--call",
+    Condition: "highlight--condition",
+    EscapedBlock: "highlight--escaped-block",
+    EscapedChar: "highlight--escapedChar",
+    Expression: "highlight--expression",
+    FilterExpression: "highlight--filter-expression",
+    Default: "highlight--default",
 };
 
-function highlight(content, node) {
-
+function highlight(original, node) {
+    const start = node.position.start;
+    const end = node.position.end;
+    let highlighted = [];
     switch (node.type) {
         case STR:
-            break;
         case BLOCK:
+            for (let child of node.nested) {
+                highlighted.push(highlight(original, child))
+            }
             break;
         case IMAGE:
+            highlighted.push(highlight(original, node.identity));
+            highlighted.push(highlight(original, node.size));
             break;
         case CALL:
+            highlighted.push(highlight(original, node.identity));
+            for (let child of node.params) {
+                highlighted.push(highlight(original, child));
+            }
             break;
         case CONDITION:
+            highlighted.push(highlight(original, node.if));
+            highlighted.push(highlight(original, node.then));
+            highlighted.push(highlight(original, node.else));
             break;
         case EXPRESSION:
         case FILTER_EXPRESSION:
+            highlighted.push(highlight(original, node.left));
+            highlighted.push(highlight(original, node.right));
             break;
     }
 
-    const start = node.position.start;
-    const end = node.position.end;
-    const color = COLORS[node.type];
-    const nodeContent = `<span style="color: ${color}">${content.substr(start, end)}</span>`;
-    return content.substr(0, start) + nodeContent + content.substr(end, content.length);
+    let substr = original.substr(start, end - start);
+    let replaced = substr;
+    for (let {raw, content} of highlighted) {
+        replaced = replaced.replace(raw, content);
+    }
+
+    return {
+        raw: substr,
+        content: `<span class="${CLASSES[node.type]}">${replaced}</span>`
+    };
 }
 
 export default function (content, ast) {
+    let replaced = content;
     for (let node of ast) {
-        content = highlight(content, node);
+        const highlighted = highlight(content, node);
+        replaced = replaced.replace(highlighted.raw, highlighted.content);
     }
 
-    return content;
+    return replaced;
 }
