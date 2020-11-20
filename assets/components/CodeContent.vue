@@ -38,16 +38,21 @@ export default {
 
         textarea.style.minHeight = "400px";
         this.$emit('change', this.textareaContent);
+
+        var observer = new ResizeObserver(entries => {
+            textarea.style.width = entries[0].target.offsetWidth + 'px';
+        });
+
+        observer.observe(code);
     },
     data: () => ({
-        textareaContent: ''
+        textareaContent: '',
     }),
 }
 </script>
 
 <style>
     .code-content {
-        height: auto;
         width: 100%;
     }
 
@@ -84,6 +89,6 @@ export default {
         font-family: Roboto sans-serif;
         line-height: 1.375rem;
         letter-spacing: normal;
-
+        white-space: pre-wrap;
     }
 </style>
