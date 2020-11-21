@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import highlight from "../plugins/highlight";
+    import highlight from "../plugins/highlight/highligter";
     import Card from "./Card";
     import CodeContent from "./CodeContent";
     export default {
@@ -47,41 +47,6 @@
     }
 </script>
 
-<style>
-    .highlight--str {
-        color: #8BC34A;
-    }
-    .highlight--block {
-        color: #80D8FF;
-    }
-    .highlight--identity {
-        color: #B39DDB;
-    }
-    .highlight--image {
-        color: #80D8FF;
-    }
-    .highlight--image-size {
-        color: #F44336;
-    }
-    .highlight--call {
-        color: #80D8FF;
-    }
-    .highlight--condition {
-        color: #FFEB3B;
-    }
-    .highlight--escaped-block {
-        color: #EF6C00;
-    }
-    .highlight--escaped-char {
-        color: #EF6C00;
-    }
-    .highlight--expression {
-        color: #FFEB3B;
-    }
-    .highlight--filter-expression {
-        color: #FFEB3B;
-    }
-    .highlight--default {
-        color: #B39DDB;
-    }
+<style lang="scss">
+    @import "../plugins/highlight/style/theme.scss";
 </style>

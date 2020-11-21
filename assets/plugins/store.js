@@ -7,9 +7,9 @@ Vue.use(Vuex);
 let defaultContent = 'Hello ${name}!\n' +
     'Do you want to try DocxTemplate with ${ filename ?: `your document`}?\n' +
     'You can use ${\n\tis_simple ?\n\t`simple conditions` :\n' +
-    '\t${ nested ? `difficult nested ternary operator` : `${ foo  ?: ${ bar ?: \\${escaped} }}`}\n} ' +
+    '\t${ nested ? `difficult \\`nested\\` ternary operator` : `${ foo  ?: ${ bar ?: \\${escaped} }}`}\n} ' +
     'and many another features!\n\n' +
-    'Written on ${ yesterday | modify(`+1 day`) | format(`d.m.Y`) }\n' +
+    'Written on ${ yesterday | modify(`+1 day`) | format(`d.m.Y`, timezone) }\n' +
     'With love. ${ signature:100px:50px }\n';
 
 export default new Vuex.Store({
