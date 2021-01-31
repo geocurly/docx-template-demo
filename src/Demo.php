@@ -60,6 +60,11 @@ class Demo
         );
     }
 
+    /**
+     * @param string $content
+     * @return array
+     * @throws SyntaxError
+     */
     private static function buildAst(string $content): array
     {
         $lexer = new Lexer($content);
